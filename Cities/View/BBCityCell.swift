@@ -12,15 +12,10 @@ class BBCityCell: UITableViewCell {
 
     @IBOutlet weak var cityTitleLabel: UILabel!
     @IBOutlet weak var cityCoordLabel: UILabel!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    func configure(withCity city:BBCity) {
+        cityTitleLabel.text = city.name + ", " + city.country
+        cityCoordLabel.text = "\(city.coord.lat),\(city.coord.lon)"
     }
 
 }

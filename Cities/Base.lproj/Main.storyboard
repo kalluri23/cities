@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Delegate-->
+        <!--Detail View Controller-->
         <scene sceneID="FWo-79-kpI">
             <objects>
                 <viewController id="1LN-1j-k3y" customClass="BBDetailViewController" customModule="Cities" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,19 +18,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KhI-V4-vgQ" customClass="MKMapView">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="yIy-e4-z1i">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <outlet property="delegate" destination="1LN-1j-k3y" id="n6P-Iv-cqY"/>
+                                    <outlet property="delegate" destination="1LN-1j-k3y" id="Y91-MZ-3V4"/>
                                 </connections>
-                            </view>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="yIy-e4-z1i" firstAttribute="leading" secondItem="8gh-PC-uAc" secondAttribute="leading" id="AVU-ZP-RUa"/>
+                            <constraint firstItem="yIy-e4-z1i" firstAttribute="top" secondItem="8gh-PC-uAc" secondAttribute="top" id="IZb-MQ-hcB"/>
+                            <constraint firstItem="yIy-e4-z1i" firstAttribute="trailing" secondItem="8gh-PC-uAc" secondAttribute="trailing" id="VTv-uj-M05"/>
+                            <constraint firstItem="yIy-e4-z1i" firstAttribute="bottom" secondItem="8gh-PC-uAc" secondAttribute="bottom" id="l6x-aG-f07"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="8gh-PC-uAc"/>
                     </view>
                     <navigationItem key="navigationItem" id="wyU-X5-bEi"/>
+                    <connections>
+                        <outlet property="mapView" destination="yIy-e4-z1i" id="Dvc-Al-hEx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dsf-Nw-hcg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -74,7 +81,7 @@
                                 <rect key="frame" x="0.0" y="120" width="375" height="547"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="57" id="GBn-Mi-Psd" customClass="BBCityCell" customModule="Cities" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BBCityCell" rowHeight="57" id="GBn-Mi-Psd" customClass="BBCityCell" customModule="Cities" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="57"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GBn-Mi-Psd" id="HlZ-Mh-mmY">
@@ -115,11 +122,22 @@
                                     <outlet property="delegate" destination="YV8-yB-5gt" id="rpt-VQ-iLJ"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="dBn-Lf-bLs">
+                                <rect key="frame" x="137.5" y="283.5" width="100" height="100"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="G6e-7X-ArZ"/>
+                                    <constraint firstAttribute="height" constant="100" id="tL2-Pu-Dnf"/>
+                                </constraints>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="8cd-Ea-c9P" firstAttribute="trailing" secondItem="DHn-wB-HGG" secondAttribute="trailing" id="CpZ-0l-xfi"/>
                             <constraint firstItem="8cd-Ea-c9P" firstAttribute="leading" secondItem="DHn-wB-HGG" secondAttribute="leading" id="E3K-Dm-Tlg"/>
+                            <constraint firstItem="dBn-Lf-bLs" firstAttribute="centerY" secondItem="APk-vD-L2B" secondAttribute="centerY" id="EOh-cv-EEn"/>
+                            <constraint firstItem="dBn-Lf-bLs" firstAttribute="centerX" secondItem="APk-vD-L2B" secondAttribute="centerX" id="K7u-7U-kMy"/>
                             <constraint firstItem="l6f-v0-ctN" firstAttribute="leading" secondItem="DHn-wB-HGG" secondAttribute="leading" id="Tjd-qr-GJ9"/>
                             <constraint firstItem="8cd-Ea-c9P" firstAttribute="top" secondItem="l6f-v0-ctN" secondAttribute="bottom" id="fa4-gq-zvq"/>
                             <constraint firstItem="8cd-Ea-c9P" firstAttribute="bottom" secondItem="DHn-wB-HGG" secondAttribute="bottom" id="hmd-Yx-jsZ"/>
@@ -130,6 +148,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="0C3-SU-ANk"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="dBn-Lf-bLs" id="bI8-eb-D8r"/>
                         <outlet property="cityListTableView" destination="8cd-Ea-c9P" id="RKf-8S-smZ"/>
                         <outlet property="viewModel" destination="IlC-WO-A8h" id="TrA-bb-zr9"/>
                     </connections>
