@@ -16,6 +16,10 @@
 		717A72362219C0C900943702 /* BBCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A72352219C0C900943702 /* BBCity.swift */; };
 		717A72392219C12C00943702 /* BBSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A72382219C12C00943702 /* BBSplitViewController.swift */; };
 		717A723C2219D85D00943702 /* BBCitiesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A723B2219D85D00943702 /* BBCitiesListViewModel.swift */; };
+		717A723E221A265000943702 /* BBListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A723D221A265000943702 /* BBListViewController.swift */; };
+		717A7240221A267400943702 /* BBDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A723F221A267400943702 /* BBDetailViewController.swift */; };
+		717A7243221A27F900943702 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A7242221A27F900943702 /* Bundle+Extensions.swift */; };
+		717A7245221A3CD300943702 /* BBCityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A7244221A3CD300943702 /* BBCityCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		717A72352219C0C900943702 /* BBCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCity.swift; sourceTree = "<group>"; };
 		717A72382219C12C00943702 /* BBSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBSplitViewController.swift; sourceTree = "<group>"; };
 		717A723B2219D85D00943702 /* BBCitiesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCitiesListViewModel.swift; sourceTree = "<group>"; };
+		717A723D221A265000943702 /* BBListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BBListViewController.swift; path = Cities/View/BBListViewController.swift; sourceTree = SOURCE_ROOT; };
+		717A723F221A267400943702 /* BBDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BBDetailViewController.swift; path = Cities/View/BBDetailViewController.swift; sourceTree = SOURCE_ROOT; };
+		717A7242221A27F900943702 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
+		717A7244221A3CD300943702 /* BBCityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCityCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +72,7 @@
 		712AFB55221773090045501C /* Cities */ = {
 			isa = PBXGroup;
 			children = (
+				717A7241221A27CF00943702 /* Helper */,
 				717A72342219BFEC00943702 /* Model */,
 				717A72372219C0EF00943702 /* View */,
 				717A723A2219C15400943702 /* ViewModel */,
@@ -105,6 +114,9 @@
 			isa = PBXGroup;
 			children = (
 				717A72382219C12C00943702 /* BBSplitViewController.swift */,
+				717A723D221A265000943702 /* BBListViewController.swift */,
+				717A723F221A267400943702 /* BBDetailViewController.swift */,
+				717A7244221A3CD300943702 /* BBCityCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -115,6 +127,14 @@
 				717A723B2219D85D00943702 /* BBCitiesListViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		717A7241221A27CF00943702 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				717A7242221A27F900943702 /* Bundle+Extensions.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,10 +210,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				717A7245221A3CD300943702 /* BBCityCell.swift in Sources */,
 				717A72362219C0C900943702 /* BBCity.swift in Sources */,
+				717A723E221A265000943702 /* BBListViewController.swift in Sources */,
 				712AFB57221773090045501C /* AppDelegate.swift in Sources */,
+				717A7240221A267400943702 /* BBDetailViewController.swift in Sources */,
 				717A72392219C12C00943702 /* BBSplitViewController.swift in Sources */,
 				717A723C2219D85D00943702 /* BBCitiesListViewModel.swift in Sources */,
+				717A7243221A27F900943702 /* Bundle+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

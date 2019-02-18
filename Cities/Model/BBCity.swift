@@ -7,3 +7,27 @@
 //
 
 import Foundation
+
+struct BBCoordinate : Codable {
+    let lon : Double
+    let lat : Double
+}
+
+struct BBCity : Codable {
+    let country : String
+    let name : String
+    let coord : BBCoordinate
+}
+
+typealias FetchHandler = (Bool, [BBCity]?) -> Void
+func loadCities(completion: @escaping FetchHandler) {
+    guard
+        let path = Bundle.main.path(forResource: "cities", ofType: "json"),
+        let data = try? Data(contentsOf: URL(fileURLWithPath: path)),
+        let cities = try? JSONDecoder().decode([BBCity].self, from: data)
+        else {
+            completion(false, nil)
+            return
+    }
+    completion(true, cities)
+}
