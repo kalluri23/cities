@@ -14,12 +14,29 @@ class BBDetailViewController: UIViewController {
     @IBOutlet weak var aboutTableView: UITableView!
     @IBOutlet weak var viewModel: BBDetailViewModel!
     @IBOutlet weak var mapView: MKMapView!
+    
+    var initialCity : BBCity? {
+        didSet {
+            viewModel.city = initialCity
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.aboutTableView.estimatedRowHeight = UITableView.automaticDimension
         viewModelBinding()
+        viewModel.reloadMap?()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateNavigationTitle()
+    }
+    
+    private func updateNavigationTitle() {
+        if let navVc = self.navigationController{
+            navVc.navigationBar.topItem?.title = viewModel.city?.name
+        }
     }
     
     private func refreshMap() {
@@ -68,13 +85,13 @@ class BBDetailViewController: UIViewController {
 
 extension BBDetailViewController: BBCitySelectionDelegate {
     func infoButtonTapped(_ city: BBCity) {
-        viewModel.city = city
-        viewModel.reloadAbout?()
+        viewModel.updateAbout(withCity: city)
+        updateNavigationTitle()
     }
     
     func citySelected(_ city: BBCity) {
-        viewModel.city = city
-        viewModel.reloadMap?()
+        viewModel.updateMap(withCity: city)
+        updateNavigationTitle()
     }
 }
 

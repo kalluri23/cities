@@ -52,5 +52,15 @@ class BBDetailViewModel: NSObject {
         }
     }
     
+    func updateMap(withCity city: BBCity) {
+        self.city = city
+        reloadMap?()
+    }
+    
+    func updateAbout(withCity city: BBCity) {
+        self.city = city
+        reloadAbout?()
+    }
+    
 
 }

@@ -34,6 +34,9 @@ class BBListViewController: UIViewController {
                 self.activityIndicator.stopAnimating()
             }
         }
+        if let detailNavVC = self.splitViewController?.viewControllers.last as? UINavigationController, let detailVC = detailNavVC.topViewController as? BBDetailViewController {
+            detailVC.initialCity = self.viewModel.cities?.first
+        }
     }
 
 }
@@ -50,6 +53,11 @@ extension BBListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cityCell = tableView.dequeueReusableCell(withIdentifier: "BBCityCell", for: indexPath) as! BBCityCell
         cityCell.configure(withCity: viewModel.cityAtIndex(index: indexPath.row))
+        if(indexPath.row % 2 == 0) {
+            cityCell.backgroundColor = UIColor.white
+        }else {
+            cityCell.backgroundColor = UIColor.groupTableViewBackground
+        }
         return cityCell
     }
     

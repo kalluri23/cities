@@ -13,7 +13,7 @@ class BBCitiesListViewModel: NSObject {
     var cities: [BBCity]?
     var matchingCities: [BBCity]?
     
-    var reloadData: (() -> Void)? //Block to reload collection view
+    var reloadData: (() -> Void)? //Block to reload master view
     
     var numberOfSections: Int {
         return 1
@@ -49,20 +49,25 @@ class BBCitiesListViewModel: NSObject {
     /** Search Cities from previously fetched list
      */
     func searchCities(matching string: String? = nil) {
-        guard let matchingString = string else {
+        guard let matchingString = string, let matchedCities = getPrefixMatchingCities(string: matchingString), matchedCities.count > 0  else {
             self.matchingCities = self.cities
             self.reloadData?()
             return
         }
+        
+        self.matchingCities = matchedCities
+        self.reloadData?()
+    }
+    
+    func getPrefixMatchingCities(string: String) -> [BBCity]? {
         let matchingCities = self.cities?.filter({(aCity) in
             
-            if aCity.name.lowercased().contains(matchingString.lowercased()) {
+            if aCity.name.lowercased().hasPrefix(string.lowercased()) {
                 return true
             }else {
                 return false
             }
         })
-        self.matchingCities = matchingCities
-        self.reloadData?()
+        return matchingCities
     }
 }
