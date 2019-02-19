@@ -20,6 +20,8 @@
 		717A7240221A267400943702 /* BBDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A723F221A267400943702 /* BBDetailViewController.swift */; };
 		717A7243221A27F900943702 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A7242221A27F900943702 /* Bundle+Extensions.swift */; };
 		717A7245221A3CD300943702 /* BBCityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A7244221A3CD300943702 /* BBCityCell.swift */; };
+		717F5C40221B950D009A41CC /* BBAboutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717F5C3F221B950D009A41CC /* BBAboutCell.swift */; };
+		717F5C42221B9678009A41CC /* BBDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717F5C41221B9678009A41CC /* BBDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		717A723F221A267400943702 /* BBDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BBDetailViewController.swift; path = Cities/View/BBDetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		717A7242221A27F900943702 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		717A7244221A3CD300943702 /* BBCityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCityCell.swift; sourceTree = "<group>"; };
+		717F5C3F221B950D009A41CC /* BBAboutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBAboutCell.swift; sourceTree = "<group>"; };
+		717F5C41221B9678009A41CC /* BBDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,7 @@
 				717A723D221A265000943702 /* BBListViewController.swift */,
 				717A723F221A267400943702 /* BBDetailViewController.swift */,
 				717A7244221A3CD300943702 /* BBCityCell.swift */,
+				717F5C3F221B950D009A41CC /* BBAboutCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -125,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				717A723B2219D85D00943702 /* BBCitiesListViewModel.swift */,
+				717F5C41221B9678009A41CC /* BBDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -211,6 +217,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				717A7245221A3CD300943702 /* BBCityCell.swift in Sources */,
+				717F5C42221B9678009A41CC /* BBDetailViewModel.swift in Sources */,
+				717F5C40221B950D009A41CC /* BBAboutCell.swift in Sources */,
 				717A72362219C0C900943702 /* BBCity.swift in Sources */,
 				717A723E221A265000943702 /* BBListViewController.swift in Sources */,
 				712AFB57221773090045501C /* AppDelegate.swift in Sources */,

@@ -10,6 +10,7 @@ import UIKit
 
 protocol BBCitySelectionDelegate: class {
     func citySelected(_ city: BBCity)
+    func infoButtonTapped(_ city: BBCity)
 }
 
 class BBListViewController: UIViewController {
@@ -31,13 +32,6 @@ class BBListViewController: UIViewController {
             DispatchQueue.main.async {
                 self.cityListTableView.reloadData()
                 self.activityIndicator.stopAnimating()
-            }
-        }
-        viewModel.reloadDetailData = { [unowned self] in
-            DispatchQueue.main.async {
-                if let detailNavVC = self.splitViewController?.viewControllers.last as? UINavigationController, let detailVC = detailNavVC.topViewController as? BBDetailViewController {
-                    detailVC.city = self.viewModel.cities?.first
-                }
             }
         }
     }
@@ -62,6 +56,7 @@ extension BBListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
 }
 
 extension BBListViewController: UITableViewDelegate {
@@ -69,6 +64,14 @@ extension BBListViewController: UITableViewDelegate {
         if let detailViewController =  selectionDelegate as? BBDetailViewController,
             let detailNavigationController = detailViewController.navigationController {
             selectionDelegate?.citySelected(viewModel.cityAtIndex(index: indexPath.row))
+            splitViewController?.showDetailViewController(detailNavigationController, sender: nil)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        if let detailViewController =  selectionDelegate as? BBDetailViewController,
+            let detailNavigationController = detailViewController.navigationController {
+            selectionDelegate?.infoButtonTapped(viewModel.cityAtIndex(index: indexPath.row))
             splitViewController?.showDetailViewController(detailNavigationController, sender: nil)
         }
     }

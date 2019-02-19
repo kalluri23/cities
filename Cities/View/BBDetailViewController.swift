@@ -11,43 +11,91 @@ import MapKit
 
 class BBDetailViewController: UIViewController {
 
+    @IBOutlet weak var aboutTableView: UITableView!
+    @IBOutlet weak var viewModel: BBDetailViewModel!
     @IBOutlet weak var mapView: MKMapView!
-    var city: BBCity? {
-        didSet {
-            loadViewIfNeeded()
-            refreshUI()
-        }
-    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.aboutTableView.estimatedRowHeight = UITableView.automaticDimension
+        viewModelBinding()
         // Do any additional setup after loading the view.
     }
     
-    private func refreshUI() {
+    private func refreshMap() {
+        loadViewIfNeeded()
+        self.aboutTableView.isHidden = true
+        self.mapView.isHidden = false
+        self.view.bringSubviewToFront(self.mapView)
         let allAnnotations = self.mapView.annotations
         self.mapView.removeAnnotations(allAnnotations)
-        guard let city = self.city else {
+        guard let city = viewModel.city else {
             return
         }
         let center = CLLocationCoordinate2D(latitude: city.coord.lat, longitude: city.coord.lon)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
-        //set region on the map
         self.mapView.setRegion(region, animated: true)
         let newPin = MKPointAnnotation()
         
         newPin.coordinate = center
         self.mapView.addAnnotation(newPin)
     }
+    
+    private func refreshAbout() {
+        self.mapView.isHidden = true
+        self.aboutTableView.isHidden = false
+        self.view.bringSubviewToFront(self.aboutTableView)
+        self.aboutTableView.reloadData()
+    }
+    
+    private func viewModelBinding()  {
+        viewModel.reloadMap = { [unowned self] in
+            DispatchQueue.main.async {
+                self.refreshMap()
+            }
+        }
+        viewModel.reloadAbout = { [unowned self] in
+            DispatchQueue.main.async {
+                self.refreshAbout()
+            }
+        }
+    }
+    
+    
 
 }
 
 extension BBDetailViewController: BBCitySelectionDelegate {
+    func infoButtonTapped(_ city: BBCity) {
+        viewModel.city = city
+        viewModel.reloadAbout?()
+    }
+    
     func citySelected(_ city: BBCity) {
-        self.city = city
+        viewModel.city = city
+        viewModel.reloadMap?()
     }
 }
 
-extension BBDetailViewController: MKMapViewDelegate {
+extension BBDetailViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberOfSections
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfRows
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let aboutCell = tableView.dequeueReusableCell(withIdentifier: "BBAboutCell", for: indexPath) as! BBAboutCell
+        viewModel.configure(cell: aboutCell, atIndexPath: indexPath)
+        return aboutCell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
     
 }
+
