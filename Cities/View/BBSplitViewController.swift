@@ -21,7 +21,7 @@ class BBSplitViewController: UISplitViewController {
         if let masterNavVC = self.viewControllers.first as? UINavigationController, let detailNavVc = self.viewControllers.last as? UINavigationController {
             masterNavVC.navigationBar.topItem?.title = Bundle.getAppName()
             if let masterVc = masterNavVC.topViewController as? BBListViewController, let detailVc = detailNavVc.topViewController as? BBDetailViewController{
-                masterVc.selectionDelegate = detailVc //set character selection delegate to detailVC
+                masterVc.selectionDelegate = detailVc //set city selection delegate to detailVC
                 detailVc.navigationItem.leftItemsSupplementBackButton = true
                 detailVc.navigationItem.leftBarButtonItem = self.displayModeButtonItem
                 

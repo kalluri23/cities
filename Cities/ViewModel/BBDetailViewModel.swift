@@ -27,6 +27,7 @@ class BBDetailViewModel: NSObject {
         return 1
     }
     
+    /** Returns fixed numebr of fields to show detail screen */
     var numberOfRows: Int {
         return 5
     }
@@ -35,6 +36,7 @@ class BBDetailViewModel: NSObject {
         super.init()
     }
     
+    /** Configures detail screen tableview cells based on city object */
     func configure(cell: BBAboutCell, atIndexPath indexPath: IndexPath) {
         if let field = FieldType(rawValue: indexPath.row), let city = self.city {
             switch field {
@@ -52,11 +54,13 @@ class BBDetailViewModel: NSObject {
         }
     }
     
+    /** Refreshes map and drops annotation */
     func updateMap(withCity city: BBCity) {
         self.city = city
         reloadMap?()
     }
     
+    /** reloads about tableview and hides map */
     func updateAbout(withCity city: BBCity) {
         self.city = city
         reloadAbout?()

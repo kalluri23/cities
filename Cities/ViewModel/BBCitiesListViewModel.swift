@@ -14,6 +14,7 @@ class BBCitiesListViewModel: NSObject {
     var matchingCities: [BBCity]?
     
     var reloadData: (() -> Void)? //Block to reload master view
+    var reloadDetailData: (() -> Void)? //Block to reload detail data from master
     
     var numberOfSections: Int {
         return 1
@@ -35,6 +36,7 @@ class BBCitiesListViewModel: NSObject {
                 self.cities = cities
                 self.matchingCities = cities
                 self.reloadData?()
+                self.reloadDetailData?()
             }
         })
     }

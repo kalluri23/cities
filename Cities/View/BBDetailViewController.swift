@@ -11,21 +11,27 @@ import MapKit
 
 class BBDetailViewController: UIViewController {
 
+    //MARK: - IBoutlets
     @IBOutlet weak var aboutTableView: UITableView!
     @IBOutlet weak var viewModel: BBDetailViewModel!
     @IBOutlet weak var mapView: MKMapView!
     
+    /** Property to set detail screen on first load */
     var initialCity : BBCity? {
         didSet {
-            viewModel.city = initialCity
+            guard let city = initialCity else {
+                return
+            }
+            viewModel.updateMap(withCity: city)
+            updateNavigationTitle()
         }
     }
 
+    //MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.aboutTableView.estimatedRowHeight = UITableView.automaticDimension
         viewModelBinding()
-        viewModel.reloadMap?()
         // Do any additional setup after loading the view.
     }
     
@@ -39,6 +45,7 @@ class BBDetailViewController: UIViewController {
         }
     }
     
+    //MARK: - Private Methods
     private func refreshMap() {
         loadViewIfNeeded()
         self.aboutTableView.isHidden = true
@@ -83,6 +90,7 @@ class BBDetailViewController: UIViewController {
 
 }
 
+//MARK: - City Cell Selection Delegate
 extension BBDetailViewController: BBCitySelectionDelegate {
     func infoButtonTapped(_ city: BBCity) {
         viewModel.updateAbout(withCity: city)
@@ -95,6 +103,7 @@ extension BBDetailViewController: BBCitySelectionDelegate {
     }
 }
 
+//MARK: - UITableViewDataSource Delegate
 extension BBDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections

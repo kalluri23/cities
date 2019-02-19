@@ -20,6 +20,9 @@ struct BBCity : Codable {
 }
 
 typealias FetchHandler = (Bool, [BBCity]?) -> Void
+
+/** Gets list of cities and parse the data from cities.json file in Data Layer folder
+*/
 func loadCities(completion: @escaping FetchHandler) {
     guard
         let path = Bundle.main.path(forResource: "cities", ofType: "json"),

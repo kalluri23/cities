@@ -9,16 +9,21 @@
 import UIKit
 
 protocol BBCitySelectionDelegate: class {
-    func citySelected(_ city: BBCity)
-    func infoButtonTapped(_ city: BBCity)
+    func citySelected(_ city: BBCity) // this delegate is called when cell is selected
+    func infoButtonTapped(_ city: BBCity) // this delegate is called when info accessory button is selected
 }
 
 class BBListViewController: UIViewController {
+    
+    //MARK: - IBOutlets
     @IBOutlet weak var viewModel: BBCitiesListViewModel!
     @IBOutlet weak var cityListTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    //MARK: - selectionDeleagate property
     weak var selectionDelegate: BBCitySelectionDelegate?
     
+    //MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.activityIndicator.startAnimating()
@@ -27,6 +32,7 @@ class BBListViewController: UIViewController {
         self.viewModel.fetchCities()
     }
     
+    //MARK: - Private Methods
     private func viewModelBinding()  {
         viewModel.reloadData = { [unowned self] in
             DispatchQueue.main.async {
@@ -34,13 +40,18 @@ class BBListViewController: UIViewController {
                 self.activityIndicator.stopAnimating()
             }
         }
-        if let detailNavVC = self.splitViewController?.viewControllers.last as? UINavigationController, let detailVC = detailNavVC.topViewController as? BBDetailViewController {
-            detailVC.initialCity = self.viewModel.cities?.first
+        viewModel.reloadDetailData = { [unowned self] in
+            DispatchQueue.main.async {
+                if let detailNavVC = self.splitViewController?.viewControllers.last as? UINavigationController, let detailVC = detailNavVC.topViewController as? BBDetailViewController {
+                    detailVC.initialCity = self.viewModel.cities?.first
+                }
+            }
         }
     }
 
 }
 
+//MARK: - UITableViewDataSource Delegate
 extension BBListViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections
@@ -67,6 +78,7 @@ extension BBListViewController: UITableViewDataSource {
     
 }
 
+//MARK: - TableView Delegate
 extension BBListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let detailViewController =  selectionDelegate as? BBDetailViewController,
@@ -85,6 +97,7 @@ extension BBListViewController: UITableViewDelegate {
     }
 }
 
+//MARK: - Search Bar Delegate
 extension BBListViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
